@@ -13,9 +13,31 @@
             </ul>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav navbar-right">
+                @guest
                 <!-- Authentication Links -->
-                <li class="nav-item"><a class="nav-link" href="#">登录</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">注册</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{route('login')}}">登录</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{route('register')}}">注册</a></li>
+                 @else
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" >
+<span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">
+<img src="https://iocaffcdn.phphub.org/uploads/images/201709/20/1/PtDKbASVcz.png?imageView2/{{Auth::user()->name }}" class="img-responsive img-circle" width="30px" height="30px">
+</span>
+                            {{\Illuminate\Support\Facades\Auth::user()->name}}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="">个人中心</a>
+                                <a class="dropdown-item" href="">编辑资料</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" id="logout" href="#">
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        {{ csrf_field() }}
+                                        <button class="btn btn-block btn-danger" type="submit" name="button">退出</button>
+                                    </form>
+                                </a>
+                            </div>
+                        </li>
+                    @endguest
             </ul>
         </div>
     </div>
