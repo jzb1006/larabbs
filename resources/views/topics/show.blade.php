@@ -50,7 +50,7 @@
 	{{ $topic->order }}
 </p> <label></label>
 <p>
-	{{ $topic-> }}
+	{{ $topic->excerpt }}
 </p>
       </div>
     </div>

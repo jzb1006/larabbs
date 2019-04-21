@@ -64,7 +64,7 @@
                 </div> 
                 <div class="form-group">
                     <label for="-field"></label>
-                    <input class="form-control" type="text" name="" id="-field" value="{{ old('', $topic-> ) }}" />
+                    <input class="form-control" type="text" name="" id="-field" value="{{ old('', $topic->excerpt ) }}" />
                 </div>
 
           <div class="well well-sm">
