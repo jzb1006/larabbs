@@ -5,9 +5,7 @@ namespace App\Models;
 class Topic extends Model
 {
     protected $fillable = ['title', 'body',
-        'user_id', 'category_id', 'reply_count',
-        'view_count', 'last_reply_user_id',
-        'order', 'excerpt','slug'];
+         'category_id','excerpt','slug'];
 
     //一对一分类模型
     public function category(){
@@ -44,5 +42,7 @@ class Topic extends Model
         //按照时间排序
         return $query->orderBy('created_at','desc');
     }
+
+
 
 }
