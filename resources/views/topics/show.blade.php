@@ -37,12 +37,14 @@
                     </div>
                     <div class="operate">
                       <hr>
+                        @can('update',$topic)
                       <a href="{{ route('topics.edit', $topic->id) }}" class="btn btn-default btn-xs pull-left" role="button">
                       <i class="far fa-edit"></i> 编辑
-              </a>
+                      </a>
               <a href="#" class="btn btn-outline-secondary btn-sm" role="button">
                 <i class="far fa-trash-alt"></i> 删除
               </a>
+                            @endcan
             </div>
           </div>
         </div>
