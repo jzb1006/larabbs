@@ -1,75 +1,44 @@
-<div class="reply-list">
+<ul class="list-unstyled">
     @foreach ($replies as $index => $reply)
-        <div class=" media"  name="reply{{ $reply->id }}" id="reply{{ $reply->id }}">
-            <div class="avatar pull-left">
+        <li class=" media" name="reply{{ $reply->id }}" id="reply{{ $reply->id }}">
+            <div class="media-left">
                 <a href="{{ route('users.show', [$reply->user_id]) }}">
-                    <img class="media-object img-thumbnail" alt="{{ $reply->user->name }}" src="{{ $reply->user->avatar }}"  style="width:48px;height:48px;"/>
+                    <img class="media-object img-thumbnail mr-3" alt="{{ $reply->user->name }}" src="{{ $reply->user->avatar }}" style="width:48px;height:48px;" />
                 </a>
             </div>
 
-            <div class="infos">
-                <div class="media-heading">
+            <div class="media-body">
+                <div class="media-heading mt-0 mb-1 text-secondary">
                     <a href="{{ route('users.show', [$reply->user_id]) }}" title="{{ $reply->user->name }}">
                         {{ $reply->user->name }}
                     </a>
-                    <span> •  </span>
-                    <span class="meta" title="{{ $reply->created_at }}">{{ $reply->created_at->diffForHumans() }}</span>
+                    <span class="text-secondary"> • </span>
+                    <span class="meta text-secondary" title="{{ $reply->created_at }}">{{ $reply->created_at->diffForHumans() }}</span>
 
                     {{-- 回复删除按钮 --}}
                     @can('destroy', $reply)
-                        <span class="meta pull-right">
-                            <form action="{{ route('replies.destroy', $reply->id) }}" method="post">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                                <button type="submit" class="btn btn-default btn-xs pull-left">
-                                    <i class="glyphicon glyphicon-trash"></i>
-                                </button>
-                            </form>
-                        </span>
+                        <span class="meta float-right">
+              <form action="{{ route('replies.destroy', $reply->id) }}"
+                    onsubmit="return confirm('确定要删除此评论？');"
+                    method="post">
+                {{ csrf_field() }}
+                  {{ method_field('DELETE') }}
+                  <button type="submit" class="btn btn-default btn-xs pull-left text-secondary">
+                  <i class="far fa-trash-alt"></i>
+                </button>
+              </form>
+            </span>
                     @endcan
                 </div>
-                <div class="reply-content">
+                <div class="reply-content text-secondary">
                     {!! $reply->content !!}
                 </div>
             </div>
-        </div>
-        <hr>
-    @endforeach
-</div><div class="reply-list">
-    @foreach ($replies as $index => $reply)
-        <div class=" media"  name="reply{{ $reply->id }}" id="reply{{ $reply->id }}">
-            <div class="avatar pull-left">
-                <a href="{{ route('users.show', [$reply->user_id]) }}">
-                    <img class="media-object img-thumbnail" alt="{{ $reply->user->name }}" src="{{ $reply->user->avatar }}"  style="width:48px;height:48px;"/>
-                </a>
-            </div>
+        </li>
 
-            <div class="infos">
-                <div class="media-heading">
-                    <a href="{{ route('users.show', [$reply->user_id]) }}" title="{{ $reply->user->name }}">
-                        {{ $reply->user->name }}
-                    </a>
-                    <span> •  </span>
-                    <span class="meta" title="{{ $reply->created_at }}">{{ $reply->created_at->diffForHumans() }}</span>
+        @if ( ! $loop->last)
+            <hr>
+        @endif
 
-                    {{-- 回复删除按钮 --}}
-                    @can('destroy', $reply)
-                        <span class="meta pull-right">
-                            <form action="{{ route('replies.destroy', $reply->id) }}" method="post">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                                <button type="submit" class="btn btn-default btn-xs pull-left">
-                                    <i class="glyphicon glyphicon-trash"></i>
-                                </button>
-                            </form>
-                        </span>
-                    @endcan
-                </div>
-                <div class="reply-content">
-                    {!! $reply->content !!}
-                </div>
-            </div>
-        </div>
-        <hr>
     @endforeach
-</div>
+</ul>
