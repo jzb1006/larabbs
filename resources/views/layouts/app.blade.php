@@ -11,6 +11,9 @@
     @yield('styles')
 </head>
 <body>
+@if (app()->isLocal())
+  @include('sudosu::user-selector')
+@endif
 <div id="app" class="{{ route_class() }}-page">
     @include('layouts._header')
     <div class="container">
