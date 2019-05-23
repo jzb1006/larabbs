@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-<<<<<<< HEAD
 use Spatie\Permission\Traits\HasRoles;
-
-class User extends Authenticatable implements MustVerifyEmail
-{
-    use Notifiable,HasRoles;
-=======
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 class User extends Authenticatable implements MustVerifyEmailContract
 {
+    use Notifiable,HasRoles;
+
+
     use MustVerifyEmail;
     use Notifiable{
         notify as protected laravelNotify;
@@ -31,7 +28,6 @@ class User extends Authenticatable implements MustVerifyEmailContract
         if(method_exists($instance,'toDatabase')){
             $this->increment('notification_count');
         }
->>>>>>> f7e52f92e1f985f6e6293ee6e23a732641912464
 
         $this->laravelNotify($instance);
     }

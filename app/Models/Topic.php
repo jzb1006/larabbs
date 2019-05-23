@@ -13,7 +13,8 @@ class Topic extends Model
     }
 
     //一对一用户模型
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
