@@ -32,6 +32,8 @@ return [
     |
     */
 
+
+
     'subtype' => env('API_SUBTYPE', ''),
 
     /*
