@@ -10,20 +10,19 @@ class VerificationCodesController extends Controller
 {
     //
     public function store(VerificationCodesRequest $request,EasySms $easySms){
-        $phone = $request->phone;
-//        $key = $request->captcha_key;
-//        $captcha_data = Cache::get($key);
-//        if(!$captcha_data) {
-//            return $this->response->error('验证码已过期',422);
-//        }
-//        if(!hash_equals($request->captcha_code,$captcha_data['code'])) {
-//            //清除缓存
-//            Cache::forget($key);
-//            return $this->response->errorUnauthorized('验证码有误');
-//        }
-//        $phone = $captcha_data['phone'];
+        $captchaData = Cache::get($request->captcha_key);
+        if (!$captchaData) {
+            return $this->response->error('图片验证码已失效',422);
+        }
+        if(!hash_equals($captchaData['code'],$request->captcha_code)){
+            //验证码错误就清除缓存
+            Cache::forget($request->captcha_key);
+            return $this->response->errorUnauthorized('验证码错误');
+        };
+
+        $phone = $captchaData['phone'];
         if(!app()->environment('production')) {
-            $code = '6686';
+            $code = '1234';
         }else {
             $code = str_pad(mt_rand(1,9999),4,0,STR_PAD_LEFT);
             try{
@@ -39,6 +38,9 @@ class VerificationCodesController extends Controller
         $expiredAt = now()->addMinute(10);
 //        Cache::forget($key);
         Cache::put($verification_key,['phone'=>$phone,'code' => $code],$expiredAt);
+
+        //清除图片缓存
+        Cache::forget($request->captcha_key);
         return $this->response->array([
             'key' => $verification_key,
             'expired_at' => $expiredAt->toDateTimeString()
