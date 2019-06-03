@@ -31,7 +31,12 @@ $api->version('v1',[
         //验证码
         $api->post('captcha','CaptchasController@store')->name('api.captchas.store');
         //第三方登陆
-        $api->post('socials/{social_type}/authorizations','AuthorizationsController@socialStore')->name('api.socials.authorizations.store');
+        $api->post('socials/{social_type}/authorizations','AuthorizationsController@socialStore')->name('api.socials.authorizations.socialStore');
+       //登陆获取Token
+        $api->post('authorizations','AuthorizationsController@store')->name('api.authorizations.store');
+        //刷新和销毁Token
+        $api->put('authorizations/current','AuthorizationsController@update')->name('api.authorizations.update');
+        $api->delete('authorizations/current','AuthorizationsController@destroy')->name('api.authorizations.delete');
     });
 
 });
