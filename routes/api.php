@@ -42,6 +42,11 @@ $api->version('v1',[
         $api->group(['middleware'=>['api.auth']],function ($api){
             //当前登陆的用户信息
             $api->get('user','UsersController@me')->name('api.user.show');
+
+            //用户编辑资料
+            $api->patch('user','UsersController@update')->name('api.user.show');
+            //图片资源
+            $api->post('images','ImagesController@store')->name('api.images.story');
         });
 
     });
