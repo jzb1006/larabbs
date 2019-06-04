@@ -20,7 +20,7 @@ $api->version('v1',[
     'namespace'=>'App\Http\Controllers\Api'
 ],function ($api){
     $api->group([
-        'middleware' => 'api.throttle',
+        'middleware' => ['api.throttle','serializer:array'],
         'limit'=>config('api.rate_limit.sign.limit'),
         'expires'=>config('api.rate_limit.sign.expires')
     ],function ($api){
@@ -37,6 +37,13 @@ $api->version('v1',[
         //刷新和销毁Token
         $api->put('authorizations/current','AuthorizationsController@update')->name('api.authorizations.update');
         $api->delete('authorizations/current','AuthorizationsController@destroy')->name('api.authorizations.delete');
+
+        //需要Token验证的接口
+        $api->group(['middleware'=>['api.auth']],function ($api){
+            //当前登陆的用户信息
+            $api->get('user','UsersController@me')->name('api.user.show');
+        });
+
     });
 
 });
