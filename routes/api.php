@@ -47,8 +47,14 @@ $api->version('v1',[
             $api->patch('user','UsersController@update')->name('api.user.show');
             //图片资源
             $api->post('images','ImagesController@store')->name('api.images.story');
+           //添加话题
+            $api->post('topics','TopicsController@store')->name('api.topics.store');
         });
 
     });
+
+    //游客可以访问的接口
+    $api->get('categories','CategoriesController@index')
+    ->name('api.categories.index');
 
 });
