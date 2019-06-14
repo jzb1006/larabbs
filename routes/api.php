@@ -20,7 +20,7 @@ $api->version('v1',[
     'namespace'=>'App\Http\Controllers\Api'
 ],function ($api){
     $api->group([
-        'middleware' => ['api.throttle','serializer:array'],
+        'middleware' => ['api.throttle','serializer:array','bindings'],
         'limit'=>config('api.rate_limit.sign.limit'),
         'expires'=>config('api.rate_limit.sign.expires')
     ],function ($api){
@@ -37,6 +37,17 @@ $api->version('v1',[
         //刷新和销毁Token
         $api->put('authorizations/current','AuthorizationsController@update')->name('api.authorizations.update');
         $api->delete('authorizations/current','AuthorizationsController@destroy')->name('api.authorizations.delete');
+
+
+        //游客可以访问的接口
+        //分类列表
+        $api->get('categories','CategoriesController@index')->name('api.categories.index');
+
+        //帖子列表
+        $api->get('topics','TopicsController@index')->name('api.topics.index');
+
+        //用户发布的帖子
+        $api->get('users/{user}/topics','TopicsController@userIndex')->name('api.users.topics.index');
 
         //需要Token验证的接口
         $api->group(['middleware'=>['api.auth','bindings']],function ($api){
@@ -59,8 +70,6 @@ $api->version('v1',[
 
     });
 
-    //游客可以访问的接口
-    $api->get('categories','CategoriesController@index')
-    ->name('api.categories.index');
+
 
 });

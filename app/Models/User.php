@@ -12,8 +12,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable,HasRoles;
-
-
     use MustVerifyEmail;
     use Notifiable{
         notify as protected laravelNotify;
@@ -107,8 +105,6 @@ class User extends Authenticatable implements JWTSubject
     }
     public function getJWTCustomClaims()
     {
-        return [
-            'aaa'=>'哈哈'
-        ];
+
     }
 }
