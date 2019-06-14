@@ -52,6 +52,8 @@ $api->version('v1',[
         //用户发布的帖子
         $api->get('users/{user}/topics','TopicsController@userIndex')->name('api.users.topics.index');
 
+        //发布回复
+        $api->post('topics/{topic}/replies','RepliesController@store')->name('api.topics.replies.store');
         //需要Token验证的接口
         $api->group(['middleware'=>['api.auth','bindings']],function ($api){
             //当前登陆的用户信息

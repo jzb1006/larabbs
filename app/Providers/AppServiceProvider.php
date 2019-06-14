@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         \App\Models\Topic::observe(\App\Observers\TopicObserver::class);
-        Reply::observe(ReplyObserver::class);
+//        Reply::observe(ReplyObserver::class);
 
     }
 }
