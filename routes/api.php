@@ -39,7 +39,7 @@ $api->version('v1',[
         $api->delete('authorizations/current','AuthorizationsController@destroy')->name('api.authorizations.delete');
 
         //需要Token验证的接口
-        $api->group(['middleware'=>['api.auth']],function ($api){
+        $api->group(['middleware'=>['api.auth','bindings']],function ($api){
             //当前登陆的用户信息
             $api->get('user','UsersController@me')->name('api.user.show');
 
@@ -49,6 +49,9 @@ $api->version('v1',[
             $api->post('images','ImagesController@store')->name('api.images.story');
            //添加话题
             $api->post('topics','TopicsController@store')->name('api.topics.store');
+            //修改话题
+            $api->patch('topics/{topic}','TopicsController@update')
+            ->name('api.topics.update');
         });
 
     });

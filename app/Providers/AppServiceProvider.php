@@ -19,6 +19,16 @@ class AppServiceProvider extends ServiceProvider
         if(app()->isLocal()){
             $this->app->register(\VIACreative\SudoSu\ServiceProvider::class);
         }
+
+        //手动修改模型绑定找不到数据的报错提示
+        \API::error(function(\Illuminate\Database\Eloquent\ModelNotFoundException $exception){
+            abort(404);
+        });
+
+        //权限不通过时，将500状态码自定义为403
+        \API::error(function(\Illuminate\Auth\Access\AuthorizationException $exception){
+            abort(403);
+        });
     }
 
     /**
