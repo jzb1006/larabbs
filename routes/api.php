@@ -54,6 +54,9 @@ $api->version('v1',[
 
         //发布回复
         $api->post('topics/{topic}/replies','RepliesController@store')->name('api.topics.replies.store');
+        //删除回复
+        $api->delete('topic/{topic}/replies/{reply}','RepliesController@destroy')->name('api.topics.replies.destroy');
+
         //需要Token验证的接口
         $api->group(['middleware'=>['api.auth','bindings']],function ($api){
             //当前登陆的用户信息
