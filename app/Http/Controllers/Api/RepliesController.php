@@ -13,7 +13,7 @@ class RepliesController extends Controller
 {
 
     public function store(ReplyRequest $request,Topic $topic,Reply $reply){
-//        $reply->content = $request->content;
+        $reply->content = $request->content;
         $reply->topic_id = $topic->id;
         $reply->user_id = $this->user()->id;
         $reply->save();
