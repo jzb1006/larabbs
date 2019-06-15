@@ -14,7 +14,6 @@ class TopicPolicy extends Policy
 
     public function destroy(User $user, Topic $topic)
     {
-
         return $user->isAuthorOf($topic);
     }
 }

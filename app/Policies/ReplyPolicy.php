@@ -7,6 +7,8 @@ use App\Models\Reply;
 
 class ReplyPolicy extends Policy
 {
+
+
     public function update(User $user, Reply $reply)
     {
          return $reply->user_id == $user->id;
@@ -14,7 +16,7 @@ class ReplyPolicy extends Policy
 
     public function destroy(User $user, Reply $reply)
     {
-        return true;
+        dd('sd');
         return $user->isAuthorOf($reply) || $user->isAuthorOf($reply->topic);
     }
 }

@@ -135,7 +135,23 @@
       <path value="$PROJECT_DIR$/vendor/overtrue/laravel-query-logger" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
+  <component name="PhpStepFilterConfiguration">
+    <skipped_functions>
+      <skipped_function name="require" />
+      <skipped_function name="composerRequire86cc82a1193070d7748b34efc3b32597" />
+      <skipped_function name="ComposerAutoloaderInit86cc82a1193070d7748b34efc3b32597::getLoader" />
+      <skipped_function name="Illuminate\Foundation\Bootstrap\HandleExceptions-&gt;handleShutdown" />
+    </skipped_functions>
+    <option name="skippedFunctions">
+      <list>
+        <option value="require" />
+        <option value="composerRequire86cc82a1193070d7748b34efc3b32597" />
+        <option value="ComposerAutoloaderInit86cc82a1193070d7748b34efc3b32597::getLoader" />
+        <option value="Illuminate\Foundation\Bootstrap\HandleExceptions-&gt;handleShutdown" />
+      </list>
+    </option>
+  </component>
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings load_method="CUSTOM_LOADER" configuration_file_path="$PROJECT_DIR$/phpunit.xml" custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" use_configuration_file="true" />
