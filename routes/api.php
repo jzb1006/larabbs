@@ -63,6 +63,9 @@ $api->version('v1',[
 
         //消息通知
         $api->get('user/notifications','NotificationsController@index')->name('api.user.notifications.iindex');
+        //未读消息统计
+        $api->get('user/notifications/stats','NotificationsController@stats')->name('api.user.notifications.stats');
+
         //需要Token验证的接口
         $api->group(['middleware'=>['api.auth','bindings']],function ($api){
             //当前登陆的用户信息

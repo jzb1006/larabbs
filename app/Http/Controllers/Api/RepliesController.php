@@ -40,4 +40,6 @@ class RepliesController extends Controller
         $replies = $user->replies()->paginate(20);
         return $this->response->paginator($replies,new ReplyTransformer());
     }
+
+
 }
