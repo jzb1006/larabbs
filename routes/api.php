@@ -68,6 +68,9 @@ $api->version('v1',[
         //标记消息为已读
         $api->patch('user/read/notifications','NotificationsController@read')->name('api.user.notifications.read');
 
+
+        //当前登陆用户权限
+        $api->get('user/permissions','PermissionsController@index')->name('api.user.permissions.index');
         //需要Token验证的接口
         $api->group(['middleware'=>['api.auth','bindings']],function ($api){
             //当前登陆的用户信息
