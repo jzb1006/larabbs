@@ -71,6 +71,9 @@ $api->version('v1',[
 
         //当前登陆用户权限
         $api->get('user/permissions','PermissionsController@index')->name('api.user.permissions.index');
+       //资源推荐
+        $api->get('links','LinksController@index')->name('api.links.index');
+
         //需要Token验证的接口
         $api->group(['middleware'=>['api.auth','bindings']],function ($api){
             //当前登陆的用户信息

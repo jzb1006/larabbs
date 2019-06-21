@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\ActiveUserHelper;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,6 +13,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable,HasRoles;
+    use ActiveUserHelper;
     use MustVerifyEmail;
     use Notifiable{
         notify as protected laravelNotify;

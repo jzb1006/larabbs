@@ -27,6 +27,7 @@ class TopicsController extends Controller
                 break;
         }
 
+
         $topics = $query->paginate(20);
         return $this->response->paginator($topics,new TopicTransformer());
 
