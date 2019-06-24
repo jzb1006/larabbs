@@ -6,6 +6,7 @@ use App\Models\Traits\ActiveUserHelper;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -15,6 +16,7 @@ class User extends Authenticatable implements JWTSubject
     use Notifiable,HasRoles;
     use ActiveUserHelper;
     use MustVerifyEmail;
+    use HasApiTokens;
     use Notifiable{
         notify as protected laravelNotify;
     }
@@ -37,6 +39,15 @@ class User extends Authenticatable implements JWTSubject
         $this->notification_count = 0;
         $this->save();
         $this->unreadNotifications->markAsRead();
+    }
+
+    //支持passport用手号码登陆
+    public function findForPassport($username){
+        filter_var($username,FILTER_VALIDATE_EMAIL)?
+            $credentials['email'] = $username:
+            $credentials['phone'] = $username;
+
+        return self::where($credentials)->first();
     }
     /**
      * The attributes that are mass assignable.

@@ -37,7 +37,7 @@ class AuthServiceProvider extends ServiceProvider
         Passport::tokensExpireIn(Carbon::now()->addDays(15));
         //refreshTokens 刷新时间
         Passport::refreshTokensExpireIn(Carbon::now()->addDays(30));
-        
+
         Horizon::auth(function ($request){
             //是否是站长
             return Auth::user()->hasRole('Founder');
