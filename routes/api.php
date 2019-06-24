@@ -20,7 +20,7 @@ $api->version('v1',[
     'namespace'=>'App\Http\Controllers\Api'
 ],function ($api){
     $api->group([
-        'middleware' => ['api.throttle','serializer:array','bindings'],
+        'middleware' => ['api.throttle','serializer:array','bindings','change-locale'],
         'limit'=>config('api.rate_limit.sign.limit'),
         'expires'=>config('api.rate_limit.sign.expires')
     ],function ($api){
