@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Listeners\PushNotification;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -26,7 +28,11 @@ class EventServiceProvider extends ServiceProvider
         ],
         SocialiteWasCalled::class=>[
             'SocialiteProviders\Weixin\WeixinExtendSocialite@handle'
-        ]
+        ],
+//        'eloquent.created'
+       'eloquent.created:DatabaseNotification::class'=>[
+             PushNotification::class
+       ]
     ];
 
     /**

@@ -35,6 +35,7 @@ class AuthorizationsController extends Controller
             }
             $oauthUser = $driver->userFromToken($token);
         }catch (\Exception $e){
+
             return $this->response->errorUnauthorized('参数有误，未能获取到用户信息');
         }
 
