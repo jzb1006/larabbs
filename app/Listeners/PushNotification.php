@@ -40,7 +40,7 @@ class PushNotification implements ShouldQueue
         $this->client->push()
             ->setPlatform('all')
             ->addRegistrationId($user->registration_id)
-            ->setNotificationAlert(strip_tags($notification->notifiable));
+            ->setNotificationAlert(strip_tags($notification->notifiable))
             ->send();
 
     }

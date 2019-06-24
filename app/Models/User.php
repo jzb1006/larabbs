@@ -94,7 +94,6 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function isAuthorOf($model){
-        dd('sdsdd');
         return $this->id == $model->user_id;
     }
 
