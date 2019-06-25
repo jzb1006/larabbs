@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\AuthorizationRequest;
 use App\Http\Requests\Api\SocialAuthorizationRequest;
 use App\Models\User;
+use App\Traits\PassportToken;
 use Auth;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
@@ -16,6 +17,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class AuthorizationsController extends Controller
 {
+    use PassportToken;
     //
     public function socialStore($type,SocialAuthorizationRequest $request){
         //通过保存access_token,openid在客户端,登陆时传递对应的值登陆
@@ -65,8 +67,10 @@ class AuthorizationsController extends Controller
                }
                break;
         }
-        $token = Auth::guard('api')->fromUser($user);
-        return $this->respondWithToken($token);
+        $result = $this->getBearerTokenByUser($user,'1',false);
+//        $token = Auth::guard('api')->fromUser($user);
+//        return $this->respondWithToken($token);
+        return $this->response->array($result)->setStatusCode(201);
     }
 
     public function store(AuthorizationServer $authorizationServer,ServerRequestInterface $serverRequest){
